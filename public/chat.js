@@ -1,5 +1,5 @@
 // Make connection
-const socket = io.connect("http://localhost:4000");
+const socket = io.connect("http://localhost:4001");
 
 const message = document.getElementById("message"),
     handle = document.getElementById("handle"),
@@ -7,6 +7,8 @@ const message = document.getElementById("message"),
     output = document.getElementById("chat-output"),
     feedback = document.getElementById("feedback");
 let isTyping = false;
+const psound = new Audio("./resources/juntos-cut.mp3");
+let cw = document.getElementById("chat-window");
 
 // Functions
 
@@ -47,6 +49,9 @@ socket.on("chat",function(data){
     isTyping = false;
     feedback.innerHTML = "";
     output.innerHTML += '<p><strong>'+data.handle+':</strong> '+data.message+'</p>';
+    psound.play();
+//    cw = document.getElementById("chat-window");
+    if(cw.scrollHeight - cw.offsetHeight > 0 && cw.scrollHeight-cw.offsetHeight > cw.scrollTop) cw.scrollBy(0,cw.scrollHeight-cw.offsetHeight-cw.scrollTop);
 });
 
 socket.on("typing",(data)=>{
