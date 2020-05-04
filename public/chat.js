@@ -9,14 +9,14 @@ const message = document.getElementById("message"),
 let isTyping = false;
 const psound = new Audio("./resources/juntos-cut.mp3");
 let cw = document.getElementById("chat-window");
-
+let sId; 
 // Functions
-
 function sendMessage(){
     socket.emit('chat',{
         message: message.value,
         handle: handle.value
     });
+    sId = socket.id;
     message.value="";
 }
 
@@ -49,7 +49,7 @@ socket.on("chat",function(data){
     isTyping = false;
     feedback.innerHTML = "";
     output.innerHTML += '<p><strong>'+data.handle+':</strong> '+data.message+'</p>';
-    psound.play();
+    if(data.handle != handle.value) psound.play();
 //    cw = document.getElementById("chat-window");
     if(cw.scrollHeight - cw.offsetHeight > 0 && cw.scrollHeight-cw.offsetHeight > cw.scrollTop) cw.scrollBy(0,cw.scrollHeight-cw.offsetHeight-cw.scrollTop);
 });

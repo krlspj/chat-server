@@ -15,9 +15,11 @@ const io = socket(server);
 
 io.on('connection',function(socket){
     console.log('made socket conection',socket.id);
+    socket.to()
     //handle chat event
     socket.on("chat",function(data){
         io.sockets.emit('chat',data);
+        //console.log("Socket id",socket.id);
     });
     // handle typing event
     socket.on("typing",(data)=>{
@@ -27,5 +29,4 @@ io.on('connection',function(socket){
     socket.on("nonTyping",()=>{
         socket.broadcast.emit("deleteTyping");
     });
-
 });
