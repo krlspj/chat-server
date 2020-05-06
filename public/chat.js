@@ -1,5 +1,7 @@
 // Make connection
-const socket = io.connect("http://localhost:4001");
+const serverIp = prompt("Introduce the server Ip");
+const socket = io.connect(serverIp);
+//const userName = prompt("type ur alias");
 
 const message = document.getElementById("message"),
     handle = document.getElementById("handle"),
@@ -9,7 +11,7 @@ const message = document.getElementById("message"),
 let isTyping = false;
 const psound = new Audio("./resources/juntos-cut.mp3");
 let cw = document.getElementById("chat-window");
-let sId; 
+let sId;
 // Functions
 function sendMessage(){
     socket.emit('chat',{
@@ -56,6 +58,8 @@ socket.on("chat",function(data){
 
 socket.on("typing",(data)=>{
     feedback.innerHTML = '<p><em>' + data +' is typing a message...</em></p>';
+    if(cw.scrollHeight - cw.offsetHeight > 0 && cw.scrollHeight-cw.offsetHeight > cw.scrollTop) cw.scrollBy(0,cw.scrollHeight-cw.offsetHeight-cw.scrollTop);
+
 });
 
 socket.on("deleteTyping",()=>{
