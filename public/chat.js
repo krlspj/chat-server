@@ -1,9 +1,12 @@
 // Make connection
-const serverIp = prompt("Introduce the server Ip");
+//const serverIp = prompt("Introduce the server Ip",'http://xxx.xxx.xxx:YYYY/');
+const serverIp = 'http://localhost:4001';
 const socket = io.connect(serverIp);
+//const socket = io.connect('http://xx.xxxx.x.x:PPPP/');
 //const userName = prompt("type ur alias");
 
 const message = document.getElementById("message"),
+    //handle = document.getElementById("handle"),
     handle = document.getElementById("handle"),
     btn = document.getElementById("send"),
     output = document.getElementById("chat-output"),
@@ -12,6 +15,9 @@ let isTyping = false;
 const psound = new Audio("./resources/juntos-cut.mp3");
 let cw = document.getElementById("chat-window");
 let sId;
+
+//handle.value = userName;
+
 // Functions
 function sendMessage(){
     socket.emit('chat',{
