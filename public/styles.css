@@ -14,15 +14,17 @@ h2{
 }
 
 #chatMain{
-    max-width: 600px;
+    max-width: 300px;
     margin: 30px auto;
     border: 1px solid #ddd;
     box-shadow: 1px 3px 5px rgba(0,0,0,0.05);
     border-radius: 2px;
+    margin-left: 10px;
 }
 
 #chat-window{
-    height: 400px;
+    height: calc(100vh - 243px); 
+   /* height: 600px; */
     overflow: auto;
     background: #f9f9f9;
 }
@@ -71,4 +73,13 @@ button{
     padding: 12px 0;
     width: 100%;
     border-radius: 0 0 2px 2px;
+}
+
+#videoView{
+    width: 500px;
+    height: 400px;
+    background-color: aquamarine;
+    position: absolute;
+    left: 350px;
+    top: 90px;
 }

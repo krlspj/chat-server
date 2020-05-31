@@ -1,6 +1,39 @@
+'use strict';
+
+
 // Make connection
 //const serverIp = prompt("Introduce the server Ip",'http://xxx.xxx.xxx:YYYY/');
-const serverIp = 'http://localhost:4001';
+// XmlHttpRequest
+
+let xhr = new XMLHttpRequest();
+const _sync = true;
+let myIP;
+let serverIp;
+//xhr.open("GET","chatCredentials.json",!_sync);
+//xhr.open("GET","index.js",!_sync);
+xhr.open("GET","./index.js",!_sync);
+//xhr.setRequestHeader('Content-Type', 'application/json');
+xhr.send();
+
+if(!_sync){
+    xhr.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200) {
+            myIP = xhr.responseText;
+            console.log(myIP);
+            setConnection();
+        }
+    };
+}else{
+    myIP = xhr.response;
+    console.log(myIP);
+//    console.log('response',xhr.response);
+}
+
+//--------------------------------------------
+function setConnection(){}
+//console.log('from chat myIP',myIP);
+if(myIP) serverIp = myIP;
+else serverIp = prompt("Introduce the server Ip",'http://xxx.xxx.xxx:YYYY/'); 
 const socket = io.connect(serverIp);
 //const socket = io.connect('http://xx.xxxx.x.x:PPPP/');
 //const userName = prompt("type ur alias");
