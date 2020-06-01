@@ -6,9 +6,12 @@
 // XmlHttpRequest
 
 let xhr = new XMLHttpRequest();
-const _sync = true;
-let myIP;
-let serverIp;
+const _sync = false;
+const _url = window.location.href;
+//const _hostName = window.location.hostname;
+//const _protocol =  window.location.protocol;
+let serverIP = _url;
+console.log('buildind serverIP',serverIP);
 //xhr.open("GET","chatCredentials.json",!_sync);
 //xhr.open("GET","index.js",!_sync);
 xhr.open("GET","./index.js",!_sync);
@@ -18,23 +21,21 @@ xhr.send();
 if(!_sync){
     xhr.onreadystatechange = function(){
         if (this.readyState == 4 && this.status == 200) {
-            myIP = xhr.responseText;
-            console.log(myIP);
-            setConnection();
+            console.log('async xhr response:',xhr.response);
         }
     };
 }else{
-    myIP = xhr.response;
-    console.log(myIP);
+    console.log('sync xhr response:',xhr.response);
 //    console.log('response',xhr.response);
 }
 
+
 //--------------------------------------------
-function setConnection(){}
 //console.log('from chat myIP',myIP);
-if(myIP) serverIp = myIP;
-else serverIp = prompt("Introduce the server Ip",'http://xxx.xxx.xxx:YYYY/'); 
-const socket = io.connect(serverIp);
+if(serverIP) ;// pass
+else serverIP = prompt("Introduce the server IP",'http://xxx.xxx.xxx:YYYY/'); 
+
+const socket = io.connect(serverIP);
 //const socket = io.connect('http://xx.xxxx.x.x:PPPP/');
 //const userName = prompt("type ur alias");
 
