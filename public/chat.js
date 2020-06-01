@@ -12,8 +12,7 @@ const _url = window.location.href;
 //const _protocol =  window.location.protocol;
 let serverIP = _url;
 console.log('buildind serverIP',serverIP);
-//xhr.open("GET","chatCredentials.json",!_sync);
-//xhr.open("GET","index.js",!_sync);
+/* Get credentials from xmlHttpRequest
 xhr.open("GET","./index.js",!_sync);
 //xhr.setRequestHeader('Content-Type', 'application/json');
 xhr.send();
@@ -28,10 +27,8 @@ if(!_sync){
     console.log('sync xhr response:',xhr.response);
 //    console.log('response',xhr.response);
 }
+*/
 
-
-//--------------------------------------------
-//console.log('from chat myIP',myIP);
 if(serverIP) ;// pass
 else serverIP = prompt("Introduce the server IP",'http://xxx.xxx.xxx:YYYY/'); 
 
